@@ -1,3 +1,9 @@
+
+//IN PLACE OF COMPONENTSHOULDUPDATE:
+// import React, { PureComponent } from 'react';
+//
+// class Timer extends PureComponent {
+
 import React, { Component } from 'react';
 
 class Timer extends Component {
@@ -15,7 +21,17 @@ class Timer extends Component {
 
   //Your code here
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.time === nextState.time) {
+      return false
+    }
+    return true
+  }
 
+  componentDidUpdate() {
+    this.timer.current.style.color =
+  "#" + Math.floor(Math.random() * 16777215).toString(16);
+  }
 
   componentDidMount() {
     this.interval = setInterval(this.clockTick, this.props.updateInterval*1000)
